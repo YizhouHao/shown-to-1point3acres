@@ -19,7 +19,9 @@ bool DictionaryTrie::insert(std::string word, unsigned int freq)
   }
 
   unsigned int i =0;
-  return inserthelp(&root,freq,i,word);  
+  std::string pass = word;
+  TrieNode** curr = &root;
+  return inserthelp(curr,freq,i,pass);  
 }
 
 /* helper method for insert*/
