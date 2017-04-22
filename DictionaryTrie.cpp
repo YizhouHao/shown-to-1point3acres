@@ -19,44 +19,44 @@ bool DictionaryTrie::insert(std::string word, unsigned int freq)
   }
 
   unsigned int i =0;
-  return inserthelp(root,freq,i,word);  
+  return inserthelp(&root,freq,i,word);  
 }
 
 /* helper method for insert*/
-bool DictionaryTrie::inserthelp(TrieNode* curr,unsigned int freq,
+bool DictionaryTrie::inserthelp(TrieNode** curr,unsigned int freq,
      unsigned int i, std::string word){
   if(word[i] == ' ')
      inserthelp(curr,freq,i+1,word);  
 
-  if(curr == NULL){
-    curr = new TrieNode(word[i]);
+  if((*curr) == NULL){
+    *curr = new TrieNode(word[i]);
   }
   
-  if(word[i] > (curr)->data){// larger
+  if(word[i] > (*curr)->data){// larger
     //root = (root)->right;
-    inserthelp(curr->right,freq,i,word);
+    inserthelp(&((*curr)->right),freq,i,word);
    }
     
-  else if(word[i] < (curr)->data){//smaller
+  else if(word[i] < (*curr)->data){//smaller
     //root = (root)->left;
-    inserthelp(curr->left,freq,i,word);
+    inserthelp(&((*curr)->left),freq,i,word);
   }
 
-  else if(word[i] == (curr)->data){
+  else if(word[i] == (*curr)->data){
     if((i+1) != word.length()){ // NOT LAST
       //root = (root)->middle;
-      inserthelp(curr->middle,freq,i+1,word);
+      inserthelp(&((*curr)->middle),freq,i+1,word);
     }
 
     else{ //last word
-      if((curr)->checkword != true){//not exist before
-        (curr)->checkword = true;
-        (curr)->freq = freq;
+      if((*curr)->checkword != true){//not exist before
+        (*curr)->checkword = true;
+        (*curr)->freq = freq;
         return true;
       }
-      else{//already exist
-        if(freq > (curr)->freq){
-          (curr)->freq = freq;
+      if((*curr)->checkword == true){//already exist
+        if(freq > (*curr)->freq){
+          (*curr)->freq = freq;
         }
         return false; 
       }

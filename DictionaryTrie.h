@@ -74,7 +74,7 @@ public:
 private:
   /* helper method for dtor*/
   void deleteAll(TrieNode* root);
-  bool inserthelp(TrieNode* curr,unsigned int freq,
+  bool inserthelp(TrieNode** curr,unsigned int freq,
        unsigned int i, std::string word);
   
   TrieNode* root;
