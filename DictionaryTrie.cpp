@@ -26,7 +26,7 @@ bool DictionaryTrie::insert(std::string word, unsigned int freq)
 bool DictionaryTrie::inserthelp(TrieNode** curr,unsigned int freq,
      unsigned int i, std::string word){
   if(word[i] == ' ')
-     inserthelp(&curr,freq,i+1,word);  
+     inserthelp(curr,freq,i+1,word);  
 
   if((*curr) == NULL){
     *curr = new TrieNode(word[i]);
