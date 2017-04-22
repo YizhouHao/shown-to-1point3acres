@@ -2,7 +2,10 @@
 #include "DictionaryTrie.h"
 
 /* Create a new Dictionary that uses a Trie back end */
-DictionaryTrie::DictionaryTrie(){}
+DictionaryTrie::DictionaryTrie(){
+  root = NULL; //initialize root 
+
+}
 
 /* Insert a word with its frequency into the dictionary.
  * Return true if the word was inserted, and false if it
@@ -10,12 +13,130 @@ DictionaryTrie::DictionaryTrie(){}
  * invalid (empty string) */
 bool DictionaryTrie::insert(std::string word, unsigned int freq)
 {
-  return false;
+
+  // word empty
+  if(word.length() == 0){
+    return false;
+  }
+  // already in the trie
+  /*if(find(word)){
+    return false;
+  }*/
+
+  TrieNode* curr = root;
+  //char* onechar = word;
+  unsigned int i =0;
+  return inserthelp(curr,freq,i,word);
+  
+  /*for(unsigned int i= 0; i<word.length();i++){
+    if(i != word.length()-1){
+      inserthelp(root,word[i],false);
+    }
+    else 
+      inserthelp(root,word[i],true); 
+  }*/
+  
+}
+
+/* helper method for insert*/
+bool DictionaryTrie::inserthelp(TrieNode* curr,unsigned int freq,
+     unsigned int i, std::string word){
+  
+  if(curr == NULL){
+    curr = new TrieNode(word[i]);
+    /*if(*(onechar+1) !=NULL){
+      *curr = new TrieNode(*onechar); 
+    }*/
+    /*else{
+      *curr = new TrieNode(*onechar); 
+      (*curr)->checkword = true;
+      (*curr)->freq = freq;
+      return true;
+    }*/
+  }
+  
+  if(word[i] > (curr)->data){// larger
+    curr = (curr)->right;
+    inserthelp(curr,freq,i,word);
+   }
+    
+  else if(word[i] < (curr)->data){//smaller
+    curr = (curr)->left;
+    inserthelp(curr,freq,i,word);
+  }
+
+  else if(word[i] == (curr)->data){
+    if((i+1) != word.length()){ // NOT LAST
+      curr = (curr)->middle;
+      inserthelp(curr,freq,i,word);
+    }
+
+    else{ //last word
+      if((curr)->checkword != true){//not exist before
+        (curr)->checkword = true;
+        (curr)->freq = freq;
+        return true;
+      }
+      else{//already exist
+        if(freq > (curr)->freq){
+          (curr)->freq = freq;
+        }
+        return false; 
+      }
+    }
+  }
+
 }
 
 /* Return true if word is in the dictionary, and false otherwise */
 bool DictionaryTrie::find(std::string word) const
 {
+  if(word.length() == 0){
+    return false;
+  }
+  if(root == NULL){//no word
+    return false;
+  }
+  
+  TrieNode* curr = root; 
+  for(unsigned int i =0;i<word.length();i++){
+
+    if(word[i]>curr->data){//larger
+      if(curr->right != NULL){
+        curr = curr->right;
+      }
+      else{
+        return false;
+      }
+    }
+    else if(word[i] < curr->data){//smaller
+      if(curr->left != NULL){
+        curr = curr->left;
+      }
+      else{
+        return false;
+      }
+    }
+
+    else if(word[i] == curr->data){
+      // already the last char
+      if(i == word.length()-1){
+        if(curr->checkword == true)
+          return true;
+        else{
+          return false;
+        }
+      }
+      // not the last char, travel down 
+      else{
+        if(curr->middle != NULL){
+          curr = curr->middle; 
+        }
+        else
+          return false;
+      } 
+    }
+  }
   return false;
 }
 
@@ -36,4 +157,30 @@ std::vector<std::string> DictionaryTrie::predictCompletions(std::string prefix, 
 }
 
 /* Destructor */
-DictionaryTrie::~DictionaryTrie(){}
+DictionaryTrie::~DictionaryTrie(){
+  deleteAll(root);
+}
+
+/* ctor for node*/
+TrieNode::TrieNode(char data){
+  checkword = false;
+  freq =0;
+  left = 0;
+  right = 0;
+  middle = 0; 
+  this->data = data; 
+}
+
+/* helper method to destructor 
+ */
+void DictionaryTrie::deleteAll(TrieNode* root){
+  if(root == NULL){
+    return;   
+  }
+  deleteAll(root->left);
+  deleteAll(root->right);
+  deleteAll(root->middle);
+  delete root;
+}
+
+

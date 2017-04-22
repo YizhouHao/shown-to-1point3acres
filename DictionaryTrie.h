@@ -10,6 +10,30 @@
 #include <string>
 
 /**
+ * the class for the node in trie
+ */
+class TrieNode{
+
+public:
+  // ctor for node
+  TrieNode(char data);
+  
+  // destructor for node  
+  //~TrieNode();
+
+
+  // check if it's the last char to mark a word 
+  bool checkword; 
+  char data; // the character in this node
+  // use TST. 3 child 
+  TrieNode* left;
+  TrieNode* right;
+  TrieNode* middle;  
+  unsigned int freq; // the frequency of this node 
+};
+
+
+/**
  *  The class for a dictionary ADT, implemented as a trie
  *  You may implement this class as either a mulit-way trie
  *  or a ternary search trie, but you must use one or the other.
@@ -48,7 +72,14 @@ public:
   ~DictionaryTrie();
 
 private:
-  // Add your own data members and methods here
+  /* helper method for dtor*/
+  void deleteAll(TrieNode* root);
+  bool inserthelp(TrieNode* curr,unsigned int freq,
+       unsigned int i, std::string word);
+  
+  TrieNode* root;
+  
 };
+
 
 #endif // DICTIONARY_TRIE_H
