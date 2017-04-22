@@ -97,6 +97,64 @@ int main(int argc, char** argv)
 
   cout << endl;
 
+  //test find
+  wit = words.begin();
+  wen = words.end();
+  for(; wit != wen; ++wit)
+  {
+      cout << "Finding: \"" << *wit << "\"... ";
+      t_bst = d_bst.find(*wit);
+      t_ht = d_ht.find(*wit);
+      tt = dt.find(*wit);
+      if(!t_bst)
+        {
+          cout << "failed for DictionaryBST... ";
+        }
+      if(!t_ht)
+        {
+          cout << "failed for DictionaryHashset... ";
+        }
+      if(!tt)
+        {
+          cout << "failed for DictionaryTrie... ";
+        }
+      if(t_bst && t_ht && tt)
+        {
+          cout << "PASSED! :D ";
+        }
+      cout << endl;
+    }
+
+  cout << endl;
+
+  // find not element
+  cout << "Finding: \"" << "nishuosha" << "\"... ";
+  std::string word1 = "nishuosha";
+  t_bst = d_bst.find(word1);
+  t_ht = d_ht.find(word1);
+  tt = dt.find(word1);
+  if(t_bst)
+    {
+      cout << "failed for DictionaryBST... ";
+    }
+  if(t_ht)
+    {
+      cout << "failed for DictionaryHashset... ";
+    }
+  if(tt)
+    {
+      cout << "failed for DictionaryTrie... ";
+    }
+  if(!t_bst && !t_ht && !tt)
+    {
+      cout << "PASSED! :D ";
+    }
+  cout << endl;
+
+
+
+
+
   
 /*You are supposed to add more test cases in this file */
   

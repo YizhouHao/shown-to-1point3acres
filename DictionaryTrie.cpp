@@ -13,39 +13,39 @@ DictionaryTrie::DictionaryTrie(){
  * invalid (empty string) */
 bool DictionaryTrie::insert(std::string word, unsigned int freq)
 {
-
   // word empty
   if(word.length() == 0){
     return false;
   }
 
-  TrieNode* curr = root;
   unsigned int i =0;
-  return inserthelp(curr,freq,i,word);  
+  return inserthelp(root,freq,i,word);  
 }
 
 /* helper method for insert*/
 bool DictionaryTrie::inserthelp(TrieNode* curr,unsigned int freq,
      unsigned int i, std::string word){
-  
+  if(word[i] == ' ')
+     inserthelp(curr,freq,i+1,word);  
+
   if(curr == NULL){
     curr = new TrieNode(word[i]);
   }
   
   if(word[i] > (curr)->data){// larger
-    curr = (curr)->right;
-    inserthelp(curr,freq,i,word);
+    //root = (root)->right;
+    inserthelp(curr->right,freq,i,word);
    }
     
   else if(word[i] < (curr)->data){//smaller
-    curr = (curr)->left;
-    inserthelp(curr,freq,i,word);
+    //root = (root)->left;
+    inserthelp(curr->left,freq,i,word);
   }
 
   else if(word[i] == (curr)->data){
     if((i+1) != word.length()){ // NOT LAST
-      curr = (curr)->middle;
-      inserthelp(curr,freq,i+1,word);
+      //root = (root)->middle;
+      inserthelp(curr->middle,freq,i+1,word);
     }
 
     else{ //last word
@@ -141,9 +141,9 @@ DictionaryTrie::~DictionaryTrie(){
 TrieNode::TrieNode(char data){
   checkword = false;
   freq =0;
-  left = 0;
-  right = 0;
-  middle = 0; 
+  left = NULL;
+  right = NULL;
+  middle = NULL; 
   this->data = data; 
 }
 
