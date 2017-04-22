@@ -18,24 +18,10 @@ bool DictionaryTrie::insert(std::string word, unsigned int freq)
   if(word.length() == 0){
     return false;
   }
-  // already in the trie
-  /*if(find(word)){
-    return false;
-  }*/
 
   TrieNode* curr = root;
-  //char* onechar = word;
   unsigned int i =0;
-  return inserthelp(curr,freq,i,word);
-  
-  /*for(unsigned int i= 0; i<word.length();i++){
-    if(i != word.length()-1){
-      inserthelp(root,word[i],false);
-    }
-    else 
-      inserthelp(root,word[i],true); 
-  }*/
-  
+  return inserthelp(curr,freq,i,word);  
 }
 
 /* helper method for insert*/
@@ -44,15 +30,6 @@ bool DictionaryTrie::inserthelp(TrieNode* curr,unsigned int freq,
   
   if(curr == NULL){
     curr = new TrieNode(word[i]);
-    /*if(*(onechar+1) !=NULL){
-      *curr = new TrieNode(*onechar); 
-    }*/
-    /*else{
-      *curr = new TrieNode(*onechar); 
-      (*curr)->checkword = true;
-      (*curr)->freq = freq;
-      return true;
-    }*/
   }
   
   if(word[i] > (curr)->data){// larger
@@ -68,7 +45,7 @@ bool DictionaryTrie::inserthelp(TrieNode* curr,unsigned int freq,
   else if(word[i] == (curr)->data){
     if((i+1) != word.length()){ // NOT LAST
       curr = (curr)->middle;
-      inserthelp(curr,freq,i,word);
+      inserthelp(curr,freq,i+1,word);
     }
 
     else{ //last word
@@ -85,7 +62,6 @@ bool DictionaryTrie::inserthelp(TrieNode* curr,unsigned int freq,
       }
     }
   }
-
 }
 
 /* Return true if word is in the dictionary, and false otherwise */
