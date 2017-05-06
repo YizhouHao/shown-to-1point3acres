@@ -8,6 +8,8 @@
 
 #include <vector>
 #include <string>
+#include<map>
+
 
 /**
  * the class for the node in trie
@@ -70,13 +72,25 @@ public:
 
   /* Destructor */
   ~DictionaryTrie();
+ 
+  /*getter for root*/
+  TrieNode* rootgetter();
 
 private:
   /* helper method for dtor*/
   void deleteAll(TrieNode* root);
+  /*helper for insert*/ 
   bool inserthelp(TrieNode** curr,unsigned int freq,
        unsigned int i, std::string word);
+
+  /*helper for prefix*/
+  bool findpre(std::string word) const;
+
+  /*helper method to insert all words*/
+  void getallwords(TrieNode* curr, std::string prefix,
+  std::multimap<int,std::string,std::greater<int>> &allwords);
   
+
   TrieNode* root;
   
 };
