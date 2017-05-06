@@ -20,10 +20,6 @@ public:
   // ctor for node
   TrieNode(char data);
   
-  // destructor for node  
-  //~TrieNode();
-
-
   // check if it's the last char to mark a word 
   bool checkword; 
   char data; // the character in this node

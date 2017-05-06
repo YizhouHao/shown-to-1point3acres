@@ -1,3 +1,9 @@
+/**
+ *  CSE 100 PA2 C++ Autocomplete
+ *  Authors:  Yizhou Hao 
+ */
+
+
 #include "util.h"
 #include "DictionaryTrie.h"
 #include<map>
@@ -28,28 +34,22 @@ bool DictionaryTrie::insert(std::string word, unsigned int freq)
 /* helper method for insert*/
 bool DictionaryTrie::inserthelp(TrieNode** curr,unsigned int freq,
      unsigned int i, std::string word){
-  bool check = false;
-  /*if(word[i] == ' ')
-     inserthelp(curr,freq,i+1,word);*/  
+  bool check = false; 
 
   if((*curr) == NULL){
     *curr = new TrieNode(word[i]);
-    //check = true;
-  }
+      }
   
   if(word[i] > (*curr)->data){// larger
-    //root = (root)->right;
     check = inserthelp(&((*curr)->right),freq,i,word);
    }
     
   else if(word[i] < (*curr)->data){//smaller
-    //root = (root)->left;
     check = inserthelp(&((*curr)->left),freq,i,word);
   }
 
   else if(word[i] == (*curr)->data){
     if((i+1) != word.length()){ // NOT LAST
-      //root = (root)->middle;
       check = inserthelp(&((*curr)->middle),freq,i+1,word);
     }
 
@@ -83,10 +83,6 @@ bool DictionaryTrie::find(std::string word) const
   TrieNode* curr = root; 
   for(unsigned int i =0;i<word.length();i++){
     label:
-    /*if(word[i] == ' '){
-      i++;
-      continue; 
-    }*/
     if(word[i]>curr->data){//larger
       if(curr->right != NULL){
         curr = curr->right;

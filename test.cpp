@@ -1,3 +1,9 @@
+/**
+ *  CSE 100 PA2 C++ Autocomplete
+ *  Authors:  Yizhou Hao 
+ */
+
+
 #include<iostream>
 #include<string>
 #include<algorithm>
@@ -11,7 +17,9 @@
 #include<fstream>
 using namespace std;
 
-
+/*
+ * The main class to run the test 
+ */
 int main(int argc, char** argv)
 {
 
@@ -36,7 +44,7 @@ int main(int argc, char** argv)
   words.push_back("crucio");
   words.push_back("autocomplete");
   
-  
+  //test insert
   cout << "Inserting into Dictionaries..." << endl;
 
   wit = words.begin();
@@ -47,7 +55,6 @@ int main(int argc, char** argv)
       t_bst = d_bst.insert(*wit);
       t_ht = d_ht.insert(*wit);
       tt = dt.insert(*wit, 1);
-      //cout << t_bst << " " << t_ht << " "<< tt << "... ";
       if(!t_bst)
 	{
 	  cout << "failed for DictionaryBST... ";
@@ -93,7 +100,7 @@ int main(int argc, char** argv)
   cout << endl; 
 
   
-
+  // test re-insert same thing
   cout << endl << "Re-inserting elements that were just inserted into Dictionaries..." << endl;
 
   wit = words.begin();
@@ -143,7 +150,7 @@ int main(int argc, char** argv)
   }
   cout << endl; 
 
-
+  // change to high freq
   cout << endl << "Re-inserting elements that were just inserted into Dictionaries with high freq..." << endl;
 
   wit = words.begin();
@@ -258,11 +265,6 @@ int main(int argc, char** argv)
   for (unsigned int i = 0;i<words1.size();i++){
     cout << words1[i] << endl; 
   }
-
-
-
-  
-/*You are supposed to add more test cases in this file */
   
   return 0;
 }

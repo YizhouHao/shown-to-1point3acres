@@ -20,7 +20,9 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-
+/*
+ * The main class to read input and run program 
+ */
 int main(int argc, char* argv[]){
 
   unsigned int min_size = std::atoi(argv[1]);
@@ -54,10 +56,6 @@ int main(int argc, char* argv[]){
     Timer T;
     T.begin_timer();
     for(unsigned int i = 0;i<100;i++){
-      /*auto it = words.begin();
-      for( ;it != words.end();it++){
-        dicthash.find(*it);
-      }*/
       unsigned int j = 0;
       while(j<100){
         dicthash.find(words[j]);
@@ -69,7 +67,6 @@ int main(int argc, char* argv[]){
    
     std::cout << (min_size + i*step_size) << "\t" << average << std:: endl;
     words.clear(); 
-    //delete dicthash; 
   }
 
   //BST
@@ -97,10 +94,6 @@ int main(int argc, char* argv[]){
     Timer T1;
     T1.begin_timer();
     for(unsigned int i = 0;i<100;i++){
-      /*auto it = words.begin();
-      for( ;it != words.end();it++){
-        dicthash.find(*it);
-      }*/
       unsigned int j = 0;
       while(j<100){
         dictbst.find(words[j]);
@@ -112,7 +105,6 @@ int main(int argc, char* argv[]){
    
     std::cout << (min_size + ii*step_size) << "\t" << average1 << std:: endl;
     words.clear(); 
-    //delete dicttrie; 
   }
 
 
@@ -142,10 +134,6 @@ int main(int argc, char* argv[]){
     Timer T1;
     T1.begin_timer();
     for(unsigned int i = 0;i<100;i++){
-      /*auto it = words.begin();
-      for( ;it != words.end();it++){
-        dicthash.find(*it);
-      }*/
       unsigned int j = 0;
       while(j<100){
         dicttrie.find(words[j]);
@@ -157,7 +145,6 @@ int main(int argc, char* argv[]){
    
     std::cout << (min_size + ii*step_size) << "\t" << average1 << std:: endl;
     words.clear(); 
-    //delete dicttrie; 
   }
 
 

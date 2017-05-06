@@ -1,3 +1,9 @@
+/**
+ *  CSE 100 PA2 C++ Autocomplete
+ *  Authors:  Yizhou Hao 
+ */
+
+
 #include <iostream>
 #include <sstream>
 #include "util.h"

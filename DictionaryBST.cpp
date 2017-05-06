@@ -1,3 +1,9 @@
+/**
+ *  CSE 100 PA2 C++ Autocomplete
+ *  Authors:  Yizhou Hao 
+ */
+
+
 #include "util.h"
 #include "DictionaryBST.h"
 
@@ -12,7 +18,7 @@ bool DictionaryBST::insert(std::string word)
     return false; 
   }
   else{
-    // the secon is the bool 
+    // the second is the bool 
     return diction.insert(word).second;
   }
 }
